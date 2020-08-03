@@ -17,6 +17,15 @@ password='".$_POST['password']."'
         $query=$this->db->query("SELECT * FROM tbclientes WHERE Cod_Aut='".$this->db->insert_id()."'");
         echo json_encode($query->result_array());
     }
+    public function login()
+    {
+        $query=$this->db->query("SELECT * FROM `tbclientes` WHERE  
+celular='".$_POST['celular']."' AND
+password='".$_POST['password']."'
+");
+//        $query=$this->db->query("SELECT * FROM tbclientes WHERE Cod_Aut='".$this->db->insert_id()."'");
+        echo json_encode($query->result_array());
+    }
     public function getgrupos(){
         $query=$this->db->query("SELECT * FROM tbgrupos g WHERE g.Cod_grup IN (SELECT tbproductos.cod_grup FROM tbproductos)");
         echo json_encode($query->result_array());
@@ -27,7 +36,8 @@ password='".$_POST['password']."'
         echo json_encode($query->result_array());
     }
     public function getcom($id){
-	    $query=$this->db->query("SELECT * FROM tbproductos p INNER JOIN tbcomposicion c ON p.cod_prod=c.cod_prod WHERE p.cod_prod='$id'");
+//	    $query=$this->db->query("SELECT * FROM tbproductos p INNER JOIN tbcomposicion c ON p.cod_prod=c.cod_prod WHERE p.cod_prod='$id'");
+        $query=$this->db->query("SELECT p2.Producto FROM tbproductos p INNER JOIN tbcomposicion c ON p.cod_prod=c.cod_prod INNER JOIN tbproductos p2 ON c.Cod_Prod_r=p2.cod_prod WHERE p.cod_prod='$id'");
         echo json_encode($query->result_array());
     }
 }
