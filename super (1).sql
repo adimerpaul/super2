@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-07-2020 a las 05:44:03
+-- Tiempo de generación: 08-08-2020 a las 01:41:11
 -- Versión del servidor: 10.1.40-MariaDB
 -- Versión de PHP: 7.3.5
 
@@ -177,6 +177,62 @@ INSERT INTO `hraingreso` (`cod_hora`, `ent_mam`, `sal_man`, `ent_tar`, `sal_tar`
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pedidodetalles`
+--
+
+CREATE TABLE `pedidodetalles` (
+  `idpedidodetalle` int(11) NOT NULL,
+  `idproducto` int(11) NOT NULL,
+  `producto` varchar(150) NOT NULL,
+  `precio` float NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `subtotal` float NOT NULL,
+  `detalle` varchar(150) NOT NULL,
+  `idpedido` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pedidodetalles`
+--
+
+INSERT INTO `pedidodetalles` (`idpedidodetalle`, `idproducto`, `producto`, `precio`, `cantidad`, `subtotal`, `detalle`, `idpedido`) VALUES
+(1, 481, 'COMBO 6', 32, 4, 128, 'JGO PLATANO 1,JGO DE NARANJA C/AGUA 1,JGO FRUTILLA C/AGUA 2,JAMON 1,TOCINO 3,', 1),
+(2, 454, 'COMBO 1', 20, 1, 20, 'JGO PLATANO C/AGUA 1,', 1),
+(3, 481, 'COMBO 6', 32, 1, 32, 'JGO DE MANZANA C/AGUA 1,TOCINO 1,', 2),
+(4, 472, 'COMBO 2', 22, 3, 66, 'JGO FRUTILLA C/AGUA 3,HUEVO 3,', 2),
+(5, 481, 'COMBO 6', 32, 5, 160, 'JGO PLATANO 2,JGO PLATANO C/AGUA 1,JGO DE NARANJA 1,JUGO 1,JAMON 3,TOCINO 2,', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `idpedido` int(11) NOT NULL,
+  `nombre` varchar(150) NOT NULL,
+  `celular` varchar(120) NOT NULL,
+  `lat` float NOT NULL,
+  `lng` float NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `total` float NOT NULL,
+  `idsucursal` int(11) NOT NULL,
+  `costoenvio` float NOT NULL,
+  `idcliente` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`idpedido`, `nombre`, `celular`, `lat`, `lng`, `fecha`, `total`, `idsucursal`, `costoenvio`, `idcliente`) VALUES
+(1, 'Adimer Paul', '69603027', -17.9957, -67.1346, '2020-08-07 23:32:51', 148, 1, 20, 12454),
+(2, 'Adimer Paul', '69603027', -17.9952, -67.1335, '2020-08-07 23:35:13', 98, 1, 20, 12454),
+(3, 'Adimer Paul', '69603027', -17.9858, -67.1296, '2020-08-07 23:38:07', 160, 1, 20, 12454);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `personal`
 --
 
@@ -238,6 +294,30 @@ CREATE TABLE `profecion` (
   `cod_prof` int(11) NOT NULL,
   `Especialidad` varchar(200) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sucursales`
+--
+
+CREATE TABLE `sucursales` (
+  `idsucursal` int(11) NOT NULL,
+  `nombre` varchar(120) NOT NULL,
+  `direccion` varchar(120) NOT NULL,
+  `lat` float NOT NULL,
+  `lng` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sucursales`
+--
+
+INSERT INTO `sucursales` (`idsucursal`, `nombre`, `direccion`, `lat`, `lng`) VALUES
+(1, 'SUPER HAMBURGUESAS', '', -17.9704, -67.1139),
+(2, 'SUPER 6 DE OCTUBRE', '', -17.9649, -67.1112),
+(3, 'SUPER PAGADOR', '', -17.9702, -67.1104),
+(4, 'SUPER SUD', '', -17.9783, -67.1323);
 
 -- --------------------------------------------------------
 
@@ -13049,35 +13129,9 @@ INSERT INTO `tbclientes` (`Cod_Aut`, `Id`, `Cod_ciudad`, `Cod_Nacio`, `cod_car`,
 (12418, '3503354', '', '', 0, 'RUTH FLORES', '', '', '', '', '', 0, '', 0, '', '', '0.00', '', '', '', ''),
 (12419, '4079993', '', '', 0, 'MAMANI', '', '', '', '', '', 0, '', 0, '', '', '0.00', '', '', '', ''),
 (12420, '2729466', '', '', 0, 'ERRERA', '', '', '', '', '', 0, '', 0, '', '', '0.00', '', '', '', ''),
-(12422, '', '', '', 0, 'JOse', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '1010', '1010'),
-(12425, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12426, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12427, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12428, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12429, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12430, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12431, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12432, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12433, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12434, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12435, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12436, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12437, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12438, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12439, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12440, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12441, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12442, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12443, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12444, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12445, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12446, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12447, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12448, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12449, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12450, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12451, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345'),
-(12452, '', '', '', 0, 'Adimer Paul Chambi Ajata', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '12345');
+(12454, '', '', '', 0, 'Adimer Paul', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '123456'),
+(12455, '', '', '', 0, 'juan lopez', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '7336199', '12345'),
+(12456, '', '', '', 0, 'jose', NULL, NULL, '', '', '', 0, '', 0, '', '', '0.00', '', '', '69603027', '123456');
 
 -- --------------------------------------------------------
 
@@ -29742,6 +29796,18 @@ ALTER TABLE `hraingreso`
   ADD PRIMARY KEY (`cod_hora`);
 
 --
+-- Indices de la tabla `pedidodetalles`
+--
+ALTER TABLE `pedidodetalles`
+  ADD PRIMARY KEY (`idpedidodetalle`);
+
+--
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`idpedido`);
+
+--
 -- Indices de la tabla `personal`
 --
 ALTER TABLE `personal`
@@ -29754,6 +29820,12 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `profecion`
   ADD PRIMARY KEY (`cod_prof`);
+
+--
+-- Indices de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  ADD PRIMARY KEY (`idsucursal`);
 
 --
 -- Indices de la tabla `tbaccesos`
@@ -30276,6 +30348,18 @@ ALTER TABLE `hraingreso`
   MODIFY `cod_hora` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88844;
 
 --
+-- AUTO_INCREMENT de la tabla `pedidodetalles`
+--
+ALTER TABLE `pedidodetalles`
+  MODIFY `idpedidodetalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `idpedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
@@ -30286,6 +30370,12 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `profecion`
   MODIFY `cod_prof` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `sucursales`
+--
+ALTER TABLE `sucursales`
+  MODIFY `idsucursal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tbaccesperfil`
@@ -30327,7 +30417,7 @@ ALTER TABLE `tbcargos`
 -- AUTO_INCREMENT de la tabla `tbclientes`
 --
 ALTER TABLE `tbclientes`
-  MODIFY `Cod_Aut` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12453;
+  MODIFY `Cod_Aut` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12457;
 
 --
 -- AUTO_INCREMENT de la tabla `tbclientesaron`
