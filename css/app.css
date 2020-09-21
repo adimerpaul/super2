@@ -1,0 +1,198 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+@font-face {
+    font-family: 'Antique Olive Std Compact';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Antique Olive Std Compact'), url('Antique-Olive-Std-Compact_3864.woff') format('woff');
+}
+
+body{
+    font-family:'Antique Olive Std Compact';
+    font-weight:normal;
+    /*font-size:42px;*/
+    background: #DF2503;
+}
+#caja1{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: -50px;
+}
+.logo{
+    /*border: 1px solid black;*/
+}
+.boton button{
+    /*border: 1px solid blue;*/
+    font-family:'Antique Olive Std Compact';font-weight:normal;font-size:13px;
+    margin: 10px;
+    color: white;
+    background:#C61B05 ;
+    border-radius: 20px;
+    padding: 15px;
+}
+#formulario{
+    background: white;
+    border-radius: 20px;
+    padding: 15px;
+}
+#formulario input{
+    display: block;
+    width: 200px;
+    background: #B0E9F7;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    font-family:'Antique Olive Std Compact';font-weight:normal;font-size:10px;
+}
+
+#formulario button{
+    display: block;
+    width: 220px;
+    background: #F2E402;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 10px;
+    font-family:'Antique Olive Std Compact';font-weight:normal;font-size:10px;
+}
+
+::placeholder{
+    color: black;
+    opacity: 1;
+    font-family:'Antique Olive Std Compact';font-weight:normal;font-size:10px;
+}
+.title-sucursal{
+    color: #F2E402;
+    font-size: 22px;
+    /*font-family:'Antique Olive Std Compact';font-weight:normal;font-size:9px;*/
+}
+
+#caja3{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.content-sucursal{
+    width: 500px;
+    background:#C61B05 ;
+    padding: 1em;
+    margin: 1em;
+    border: 0px;
+    border-radius: 1em;
+}
+.content-sucursal label{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    font-size: 22px;
+    color: white;
+}
+.content-sucursal p{
+    font-size: 10px;
+    color: #F2E402;
+}
+
+#caja4{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /*border: 1px solid blue;*/
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+}
+
+
+.grupo1{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    /*border: 1px solid black;*/
+    font-size: 20px;
+    color: #F2E402;
+}
+.grupo2{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    font-size: 20px;
+    color: white;
+}
+.menu{
+    /*border: 1px solid white;*/
+    color: white;
+    padding: 10px;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.menu label{
+    width:180px;
+    font-size: 12px;
+    /*border: 1px solid white;*/
+    text-align: center;
+}
+.pedidos{
+    background: white;
+    padding: 1px;
+    width: 5px;
+    height: 5px;
+    border-radius: 5px;
+    color:#C61B05 ;
+}
+.produ{
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    font-size: 20px;
+    color: white;
+    padding: 35px;
+}
+.card-body{
+    text-align: center;
+    background:#C61B05 ;
+    color: white;
+}
+.card-body div{
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-family: 'Kanit', sans-serif;
+    font-weight: bold;
+}
+.precio{
+    color: #F2E402;
+    font-size: 15px
+}
