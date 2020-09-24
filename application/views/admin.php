@@ -28,9 +28,14 @@
             <div class="logo">
                 <img src="img/logosuper.png" alt="" width="350">
             </div>
-            <div class="boton">
-                <button @click="caja++">INICIAR MI PEDIDO</button>
-            </div>
+            <form action="" @submit.prevent="login">
+                <input type="text" class="form-control" placeholder="usuario" v-model="usuario.usuario" required autofocus>
+                <input type="password" class="form-control" placeholder="password" v-model="usuario.password" required>
+                <div class="boton">
+                    <button type="submit">INICIAR MI PEDIDO</button>
+                </div>
+            </form>
+
         </div>
     </template>
     <template v-else-if="caja==2">
@@ -75,12 +80,12 @@
                 <div v-for="(item,index) in productos" :key="index"  class=" accordion "  >
                     <div style="background: red;border: 0px;margin: 0px;padding: 0px" class="card">
                         <div  style="background: red;border: 0px;margin: 0px;padding: 0px" class="card-header" id="headingTwo">
-<!--                            <h2 class="mb-0">-->
-                                <button   v-bind:style="{background: '#ccc url(img/grupos/'+item.CodAut+'.jpg) no-repeat center center '}" style="width: 100%;border: 0px;margin: 0px;padding: 25px" class="btn text-center text-white btn-link btn-block text-left collapsed " type="button"
-                                        data-toggle="collapse" v-bind:data-target="'#ab'+item.CodAut" aria-expanded="false">
-                                    {{item.Producto}}
-                                </button>
-<!--                            </h2>-->
+                            <!--                            <h2 class="mb-0">-->
+                            <button   v-bind:style="{background: '#ccc url(img/grupos/'+item.CodAut+'.jpg) no-repeat center center '}" style="width: 100%;border: 0px;margin: 0px;padding: 25px" class="btn text-center text-white btn-link btn-block text-left collapsed " type="button"
+                                      data-toggle="collapse" v-bind:data-target="'#ab'+item.CodAut" aria-expanded="false">
+                                {{item.Producto}}
+                            </button>
+                            <!--                            </h2>-->
                         </div>
                         <div v-bind:id="'ab'+item.CodAut" class="collapse" >
                             <div class="card-body" @click="getcom(item)">
@@ -89,22 +94,22 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="card">-->
-<!--                        <div class="card-header" id="headingThree">-->
-<!--                            <h2 class="mb-0">-->
-<!--                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
-<!--                                    Collapsible Group Item #3-->
-<!--                                </button>-->
-<!--                            </h2>-->
-<!--                        </div>-->
-<!--                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">-->
-<!--                            <div class="card-body">-->
-<!--                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <!--                    <div class="card">-->
+                    <!--                        <div class="card-header" id="headingThree">-->
+                    <!--                            <h2 class="mb-0">-->
+                    <!--                                <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">-->
+                    <!--                                    Collapsible Group Item #3-->
+                    <!--                                </button>-->
+                    <!--                            </h2>-->
+                    <!--                        </div>-->
+                    <!--                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">-->
+                    <!--                            <div class="card-body">-->
+                    <!--                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
                 </div>
-<!--                <p v-for="(item,index) in productos" :key="index" v-bind:style="{background: '#ccc url(img/grupos/'+item.CodAut+'.jpg) no-repeat center center'}"  class="produ" >{{item.Producto}}</p>-->
+                <!--                <p v-for="(item,index) in productos" :key="index" v-bind:style="{background: '#ccc url(img/grupos/'+item.CodAut+'.jpg) no-repeat center center'}"  class="produ" >{{item.Producto}}</p>-->
             </center>
         </div>
 
@@ -121,21 +126,21 @@
                     <div class="modal-body">
                         <form @submit.prevent="agregarpedido()">
                             <center>
-                            <div class="form-group row">
-                                <label for="cantidad" class="col-6 col-form-label"><div style="background: #F2E402;border-radius: 1em">Cantidad:</div></label>
-                                <div class="col-6" id="cantidad">
-<!--                                    <input type="text" class="form-control" id="inputPassword">-->
-                                    <select class="form-control" v-model="cantidad">
-                                        <option v-for="i in cantidades" v-bind:value="i">{{i}}</option>
-                                    </select>
+                                <div class="form-group row">
+                                    <label for="cantidad" class="col-6 col-form-label"><div style="background: #F2E402;border-radius: 1em">Cantidad:</div></label>
+                                    <div class="col-6" id="cantidad">
+                                        <!--                                    <input type="text" class="form-control" id="inputPassword">-->
+                                        <select class="form-control" v-model="cantidad">
+                                            <option v-for="i in cantidades" v-bind:value="i">{{i}}</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="precio" class="col-6 col-form-label" ><div style="background: #F2E402;border-radius: 1em">Precio:</div></label>
-                                <div class="col-6">
-                                    <input type="text" class="form-control" disabled id="precio" v-bind:value="parseFloat(producto.Precio)+' Bs.'">
+                                <div class="form-group row">
+                                    <label for="precio" class="col-6 col-form-label" ><div style="background: #F2E402;border-radius: 1em">Precio:</div></label>
+                                    <div class="col-6">
+                                        <input type="text" class="form-control" disabled id="precio" v-bind:value="parseFloat(producto.Precio)+' Bs.'">
+                                    </div>
                                 </div>
-                            </div>
                                 <div class="form-group row">
                                     <label for="precio" class="col-6 col-form-label" ><div style="background: #F2E402;border-radius: 1em">Subtotal:</div></label>
                                     <div class="col-6">
@@ -144,9 +149,9 @@
                                 </div>
                                 <div v-if="varios.length!=0" cols="12" sm="12" style="margin: 0px;padding: 0px;border: 0px">
                                     <h6 style="background: #F2E402;border-radius: 1em">Este producto contiene:</h6>
-                                        <p v-for="item in varios" style="margin: 0px;padding: 0px;border: 0px">
-                                            - {{item.Producto}}
-                                        </p>
+                                    <p v-for="item in varios" style="margin: 0px;padding: 0px;border: 0px">
+                                        - {{item.Producto}}
+                                    </p>
                                 </div>
                                 <div v-if="bebidas.length!=0" cols="12" sm="12" style="margin: 0px;padding: 0px;border: 0px">
                                     <h6 style="background: #F2E402;border-radius: 1em">Elige tu(s) bebidas:</h6>
@@ -159,15 +164,15 @@
                                     <div style="font-size: 10px" v-else-if="parseFloat(totalbebidas)==parseFloat(cantidad)" class="alert alert-success alert-dismissible fade show" role="alert">
                                         Selecionado corretamente
                                     </div>
-<!--                                    <v-alert v-if="parseFloat(cantidad)!=1 && parseFloat(totalbebidas)<parseFloat(cantidad)" type="info" style="margin: 0px;padding: 0px;border: 0px">-->
-<!--                                        Deves selecionar {{cantidad}}, bebidas selecionadas {{totalbebidas}}-->
-<!--                                    </v-alert>-->
-<!--                                    <v-alert v-else-if="parseFloat(totalbebidas)>parseFloat(cantidad)" type="warning" style="margin: 0px;padding: 0px;border: 0px">-->
-<!--                                        Seleciono {{totalbebidas}}  bebidas y deve seleccionar  {{cantidad}}-->
-<!--                                    </v-alert>-->
-<!--                                    <v-alert v-else-if="parseFloat(totalbebidas)==parseFloat(cantidad)" type="success" style="margin: 0px;padding: 0px;border: 0px">-->
-<!--                                        Selecionado corretamente-->
-<!--                                    </v-alert>-->
+                                    <!--                                    <v-alert v-if="parseFloat(cantidad)!=1 && parseFloat(totalbebidas)<parseFloat(cantidad)" type="info" style="margin: 0px;padding: 0px;border: 0px">-->
+                                    <!--                                        Deves selecionar {{cantidad}}, bebidas selecionadas {{totalbebidas}}-->
+                                    <!--                                    </v-alert>-->
+                                    <!--                                    <v-alert v-else-if="parseFloat(totalbebidas)>parseFloat(cantidad)" type="warning" style="margin: 0px;padding: 0px;border: 0px">-->
+                                    <!--                                        Seleciono {{totalbebidas}}  bebidas y deve seleccionar  {{cantidad}}-->
+                                    <!--                                    </v-alert>-->
+                                    <!--                                    <v-alert v-else-if="parseFloat(totalbebidas)==parseFloat(cantidad)" type="success" style="margin: 0px;padding: 0px;border: 0px">-->
+                                    <!--                                        Selecionado corretamente-->
+                                    <!--                                    </v-alert>-->
 
                                     <p v-for="item in bebidas" style="margin: 0px;padding: 0px;border: 0px;text-align: left;font-size: 11px">
                                         <input v-if="cantidad==1" v-model="item.cantidad" @click="selectagre(item)" type="radio" name="bebidas" required>
@@ -219,46 +224,46 @@
                 <label style="color: #F2E402">({{item.cantidad}}) Precio:({{item.subtotal}})Bs</label>
                 <button style="background: none;color: white" @click="elipedido(index)"><i class="fa fa-trash"></i></button>
 
-<!--                <v-list-item-content>-->
-<!--                    <v-list-item-title >-->
-<!--                        <v-row>-->
-<!--                            <v-col cols="9">{{item.producto}}</v-col>-->
-<!--                            <v-col  cols="3" aling="center" style="text-align: right">-->
-<!--                                <v-btn small color="error" @click="elipedido(index)"><i class="fa fa-trash"></i></v-btn>-->
-<!--                            </v-col>-->
-<!--                        </v-row>-->
-<!--                    </v-list-item-title>-->
-<!--                    <v-list-item-subtitle  style="text-align: right">-->
-<!--                        <v-row>-->
-<!--                            <v-col cols="6" aling="center" style="text-align: left">-->
-<!--                                <p v-for="i in item.detalle" style="padding: 0px;margin: 0px;border: 0px">-->
-<!--                                    <v-badge-->
-<!--                                            :content="i.cantidad"-->
-<!--                                            :value="i.cantidad"-->
-<!--                                            color="green"-->
-<!--                                            overlap-->
-<!--                                    >-->
-<!--                                        {{i.Producto}}-->
-<!--                                    </v-badge>-->
-<!--                                </p>-->
-<!--                            </v-col>-->
-<!--                            <v-col  cols="6" aling="center" style="text-align: right">-->
-<!--                                <v-btn x-small color="secondary" dark>Cant. {{item.cantidad}}</v-btn> <v-btn x-small color="secondary" dark>Prec. {{item.precio}}</v-btn> <v-btn x-small color="secondary" dark>Subt. {{item.subtotal}}</v-btn>-->
-<!--                            </v-col>-->
-<!--                        </v-row>-->
-<!---->
-<!--                    </v-list-item-subtitle>-->
-<!---->
-<!--                </v-list-item-content>-->
+                <!--                <v-list-item-content>-->
+                <!--                    <v-list-item-title >-->
+                <!--                        <v-row>-->
+                <!--                            <v-col cols="9">{{item.producto}}</v-col>-->
+                <!--                            <v-col  cols="3" aling="center" style="text-align: right">-->
+                <!--                                <v-btn small color="error" @click="elipedido(index)"><i class="fa fa-trash"></i></v-btn>-->
+                <!--                            </v-col>-->
+                <!--                        </v-row>-->
+                <!--                    </v-list-item-title>-->
+                <!--                    <v-list-item-subtitle  style="text-align: right">-->
+                <!--                        <v-row>-->
+                <!--                            <v-col cols="6" aling="center" style="text-align: left">-->
+                <!--                                <p v-for="i in item.detalle" style="padding: 0px;margin: 0px;border: 0px">-->
+                <!--                                    <v-badge-->
+                <!--                                            :content="i.cantidad"-->
+                <!--                                            :value="i.cantidad"-->
+                <!--                                            color="green"-->
+                <!--                                            overlap-->
+                <!--                                    >-->
+                <!--                                        {{i.Producto}}-->
+                <!--                                    </v-badge>-->
+                <!--                                </p>-->
+                <!--                            </v-col>-->
+                <!--                            <v-col  cols="6" aling="center" style="text-align: right">-->
+                <!--                                <v-btn x-small color="secondary" dark>Cant. {{item.cantidad}}</v-btn> <v-btn x-small color="secondary" dark>Prec. {{item.precio}}</v-btn> <v-btn x-small color="secondary" dark>Subt. {{item.subtotal}}</v-btn>-->
+                <!--                            </v-col>-->
+                <!--                        </v-row>-->
+                <!---->
+                <!--                    </v-list-item-subtitle>-->
+                <!---->
+                <!--                </v-list-item-content>-->
             </p>
             <h4 style="text-align: right;color: white;padding: 0em 0.5em">TOTAL BS. <small style="padding: 5px 10px ;border-radius: 5px;background: #C61B05">{{total}}</small></h4>
             <h3 style="text-align: right;color: white;padding: 0em 0.5em"><small @click="realizarpedido" style="cursor:pointer ;padding: 5px 10px ;border-radius: 5px;color: #C61B05;text-shadow: #F2E402 1px 1px 0.5px">CONFIRMAR PEDIDO</small></h3>
-<!--            <pre>{{sucursal}}</pre>-->
+            <!--            <pre>{{sucursal}}</pre>-->
         </div>
     </template>
 </div>
 
-<script src="js/app.js">
+<script src="js/admin.js">
 </script>
 </body>
 </html>

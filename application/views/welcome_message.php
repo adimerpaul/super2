@@ -531,6 +531,9 @@
             },
             agregarpedido(){
                 // console.log(this.producto);
+
+
+
                 let det=[];
                 this.bebidas.forEach(r=>{
                     // console.log(r);

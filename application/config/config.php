@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('America/La_Paz');
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*

@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Admin extends CI_Controller {
 
-	public function index()
-	{
-		$this->load->view('super');
-	}
+    public function index()
+    {
+        $this->load->view('admin');
+    }
     public function guardar()
     {
         $this->db->query("INSERT INTO `tbclientes` SET
@@ -19,17 +19,24 @@ password='".$_POST['password']."'
     }
     public function login()
     {
-        $query=$this->db->query("SELECT * FROM `tbclientes` WHERE  
-celular='".$_POST['celular']."' AND
-password='".$_POST['password']."'
-");
+//        $query=$this->db->query("SELECT * FROM `tbclientes` WHERE
+//celular='".$_POST['celular']."' AND
+//password='".$_POST['password']."'
+//");
 //        $query=$this->db->query("SELECT * FROM tbclientes WHERE Cod_Aut='".$this->db->insert_id()."'");
-        echo json_encode($query->result_array());
+//        var_dump($_POST);
+//        exit;
+        if ($_POST['password']=="super123Super" && $_POST['usuario']=="super"){
+            echo "yes";
+        }else{
+            echo "no";
+        }
+
     }
     public function ingreso(){
-	    $query=$this->db->query("SELECT * FROM  tbclientes WHERE Id='".$_POST['carnet']."'");
-	    if ($query->num_rows()==0){
-	    $this->db->query("INSERT INTO `tbclientes` 
+        $query=$this->db->query("SELECT * FROM  tbclientes WHERE Id='".$_POST['carnet']."'");
+        if ($query->num_rows()==0){
+            $this->db->query("INSERT INTO `tbclientes` 
         (`Cod_Aut`,
             `Id`,
             `Cod_ciudad`,
