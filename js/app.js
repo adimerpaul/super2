@@ -59,6 +59,11 @@ var app = new Vue({
         }else{
             this.usuario.mesa=localStorage.getItem("mesa");
         }
+        if (localStorage.getItem("direccion") === null) {
+
+        }else{
+            this.usuario.direccion=localStorage.getItem("direccion");
+        }
 
         for (let i=1;i<=100;i++){
             this.cantidades.push(i);
@@ -90,6 +95,7 @@ var app = new Vue({
             localStorage.setItem("nombre",this.usuario.nombre);
             localStorage.setItem("carnet",this.usuario.carnet);
             localStorage.setItem("mesa",this.usuario.mesa);
+            localStorage.setItem("direccion",this.usuario.direccion);
             this.caja++;
             axios.post('Welcome/ingreso',this.usuario).then(res=>{
                // console.log(res.data);
@@ -285,14 +291,11 @@ var app = new Vue({
                         idsucursal:this.sucursal.NroAut,
                         costoenvio:0,
                     }).then(async res=>{
-
-
-
                         // let cm=this;
-
                         let idpedido=await res.data;
-                        // console.log(idpedido);
-                        await axios.get('Welcome/comanda').then(async res=>{
+                        console.log(this.sucursal.Nro);
+                        await axios.get('Welcome/comanda/'+this.sucursal.Nro).then(async res=>{
+                            // console.log(res.data);
                             let comanda=res.data;
                             this.pedidos.forEach(async (res)=>{
                                 // console.log(res);
@@ -305,12 +308,32 @@ var app = new Vue({
                                             r.cantidad=1;
                                         }
                                         det+=r.Producto.trim()+' '+r.cantidad+',';
+
+                                        await axios.post('Welcome/ventasadj',{
+                                            comanda:comanda,
+                                            nro:this.sucursal.Nro,
+                                            idproducto:r.CodAut,
+                                            idproductop:res.idproducto,
+                                            producto:res.producto,
+                                            precio:res.precio,
+                                            cantidad:res.cantidad,
+                                            subtotal:res.subtotal,
+                                            idpedido:idpedido,
+                                            // detalle:det,
+                                            ci:this.usuario.Id,
+                                            // mesa:this.usuario.mesa,
+
+                                        }).then(re=>{
+
+                                        });
+
                                     });
                                 }
                                 // console.log(res);
 
                                 // console.log(res.data);
                                 await axios.post('Welcome/pedidodetalles',{
+                                    nro:this.sucursal.Nro,
                                     idproducto:res.idproducto,
                                     producto:res.producto,
                                     precio:res.precio,
