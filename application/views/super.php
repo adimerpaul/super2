@@ -254,7 +254,7 @@
             </p>
             <h4 style="text-align: right;color: white;padding: 0em 0.5em">TOTAL BS. <small style="padding: 5px 10px ;border-radius: 5px;background: #C61B05">{{total}}</small></h4>
             <h3 style="text-align: right;color: white;padding: 0em 0.5em"><small @click="realizarpedido" style="cursor:pointer ;padding: 5px 10px ;border-radius: 5px;color: #C61B05;text-shadow: #F2E402 1px 1px 0.5px">CONFIRMAR PEDIDO</small></h3>
-            <pre>{{pedidos}}</pre>
+<!--            <pre>{{pedidos}}</pre>-->
         </div>
     </template>
 </div>

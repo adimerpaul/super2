@@ -133,9 +133,10 @@ FROM tbproductos p WHERE p.cod_grup='$id'"
         echo $this->db->insert_id();
     }
     public function comanda($nro){
-        $this->db->query("SELECT Nro  FROM tbdatfac WHERE Nro='$nro'");
+        $this->db->query("UPDATE tbdatfac  SET NroComanda=NroComanda+1 WHERE Nro='$nro'");
+//	    $this->db->query("SELECT NroComanda  FROM tbdatfac WHERE Nro='$nro'");
 
-        echo  ($this->db->query("SELECT Nro  FROM tbdatfac WHERE Nro='$nro'")->row()->Nro)+1;
+        echo  ($this->db->query("SELECT NroComanda  FROM tbdatfac WHERE Nro='$nro'")->row()->NNroComandaro);
 //        json_encode($query->result_array());
     }
     public function ventasadj(){
@@ -217,7 +218,8 @@ FROM tbproductos p WHERE p.cod_grup='$id'"
         `NomFuncion`,
         `Fech_Espec`,
         `AtCliente`,
-        `tarjeta`) VALUES (
+        `tarjeta`,
+        `deliv`) VALUES (
         NULL,
         '".$_POST['comanda']."',
         '0',
@@ -255,7 +257,8 @@ FROM tbproductos p WHERE p.cod_grup='$id'"
         '',
         '0000-00-00',
         '',
-        '');");
+        '',
+        '1');");
         echo "1";
     }
 }
