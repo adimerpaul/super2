@@ -295,7 +295,7 @@ var app = new Vue({
                         let idpedido=await res.data;
                         console.log(this.sucursal.Nro);
                         await axios.get('Welcome/comanda/'+this.sucursal.Nro).then(async res=>{
-                            // console.log(res.data);
+                            console.log(res.data);
                             let comanda=res.data;
                             this.pedidos.forEach(async (res)=>{
                                 // console.log(res);

@@ -136,7 +136,7 @@ FROM tbproductos p WHERE p.cod_grup='$id'"
         $this->db->query("UPDATE tbdatfac  SET NroComanda=NroComanda+1 WHERE Nro='$nro'");
 //	    $this->db->query("SELECT NroComanda  FROM tbdatfac WHERE Nro='$nro'");
 
-        echo  ($this->db->query("SELECT NroComanda  FROM tbdatfac WHERE Nro='$nro'")->row()->NNroComandaro);
+        echo  ($this->db->query("SELECT NroComanda  FROM tbdatfac WHERE Nro='$nro'")->row()->NroComanda);
 //        json_encode($query->result_array());
     }
     public function ventasadj(){
