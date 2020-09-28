@@ -277,7 +277,6 @@ var app = new Vue({
             }).then(async (result) => {
                 if (result.isConfirmed) {
                     Vue.toasted.show('Enviado pedido...');
-
                     await  axios.post('Welcome/pedido',{
                         nombre:this.usuario.Nombres,
                         idcliente:this.usuario.Id,
