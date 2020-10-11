@@ -1,11 +1,10 @@
 Vue.use(Toasted)
-
-
 var app = new Vue({
     el: '#app',
     data: {
         message: 'Hola Vue!',
         caja:1,
+        tipo:'',
         cantidad:1,
         sucursales:[],
         grupos:[],
@@ -17,6 +16,7 @@ var app = new Vue({
         bebidas:[],
         agregados:[],
         cantidades:[],
+        carnet:'',
         pedidos:[
             // {
             //     "imagen": "2",
@@ -31,6 +31,7 @@ var app = new Vue({
         usuario:{},
     },
     created(){
+        this.buscar();
 
         // Swal.fire({
         //     title: 'Error!',
@@ -39,30 +40,30 @@ var app = new Vue({
         //     confirmButtonText: 'Cool'
         // });
         //
-        if (localStorage.getItem("celular") === null) {
+        if (localStorage.getItem("celular") === null || localStorage.getItem("celular")==undefined) {
 
         }else{
             this.usuario.celular=localStorage.getItem("celular");
         }
-        if (localStorage.getItem("nombre") === null) {
+        if (localStorage.getItem("nombre") === null || localStorage.getItem("nombre")==undefined) {
 
         }else{
-            this.usuario.nombre=localStorage.getItem("nombre");
+            this.usuario.Nombres=localStorage.getItem("nombre");
         }
-        if (localStorage.getItem("carnet") === null) {
+        if (localStorage.getItem("carnet") === null || localStorage.getItem("carnet")==undefined) {
 
         }else{
-            this.usuario.carnet=localStorage.getItem("carnet");
+            this.carnet=localStorage.getItem("carnet");
         }
-        if (localStorage.getItem("mesa") === null) {
+        if (localStorage.getItem("mesa") === null || localStorage.getItem("mesa")==undefined) {
 
         }else{
             this.usuario.mesa=localStorage.getItem("mesa");
         }
-        if (localStorage.getItem("direccion") === null) {
+        if (localStorage.getItem("direccion") === null || localStorage.getItem("direccion")==undefined) {
 
         }else{
-            this.usuario.direccion=localStorage.getItem("direccion");
+            this.usuario.Direccion=localStorage.getItem("direccion");
         }
 
         for (let i=1;i<=100;i++){
@@ -90,14 +91,44 @@ var app = new Vue({
 
     },
     methods:{
+        buscar(){
+            if (this.carnet!=""){
+                // Vue.toasted.show('Buscando...');
+                axios.post('Welcome/buscarperona',{carnet:this.carnet}).then(res=>{
+                    // console.log(res.data);
+                    if (res.data.length > 0 ){
+
+                        this.usuario=res.data[0];
+                        console.log(this.usuario);
+                        // this.usuario.nombre=res.data[0].Nombres;
+                        // this.usuario.direccion=res.data[0].Direccion;
+                        // this.usuario.celular=res.data[0].celular;
+                    }else{
+                        this.usuario=[];
+                        // this.usuario.celular='';
+                        // this.usuario.nombre='';
+                        // this.usuario.direccion='';
+                    }
+
+                    // this.usuario=res.data[0];
+                    // console.log(this.usuario);
+                    Vue.toasted.clear();
+                });
+            }
+        },
         datos(){
             localStorage.setItem("celular",this.usuario.celular);
-            localStorage.setItem("nombre",this.usuario.nombre);
-            localStorage.setItem("carnet",this.usuario.carnet);
+            localStorage.setItem("nombre",this.usuario.Nombres);
+            localStorage.setItem("carnet",this.carnet);
             localStorage.setItem("mesa",this.usuario.mesa);
-            localStorage.setItem("direccion",this.usuario.direccion);
+            localStorage.setItem("direccion",this.usuario.Direccion);
             this.caja++;
-            axios.post('Welcome/ingreso',this.usuario).then(res=>{
+            axios.post('Welcome/ingreso',{
+                carnet:this.carnet,
+                nombre:this.usuario.Nombres,
+                direccion:this.usuario.Direccion,
+                celular:this.usuario.celular
+            }).then(res=>{
                // console.log(res.data);
                 this.usuario=res.data[0];
                 // console.log(this.usuario);
@@ -110,9 +141,9 @@ var app = new Vue({
             })
         },
         agregarpedido(){
-            console.log(this.cantidad);
-            console.log(parseFloat(this.totalbebidas));
-            console.log(parseFloat(this.totalagregados));
+            // console.log(this.cantidad);
+            // console.log(parseFloat(this.totalbebidas));
+            // console.log(parseFloat(this.totalagregados));
 
             if (this.cantidad==1){
 
@@ -343,6 +374,7 @@ var app = new Vue({
                                     ci:this.usuario.Id,
                                     mesa:this.usuario.mesa,
                                     comanda:comanda,
+                                    deliv:this.tipo
                                 }).then(re=>{
                                     // console.log(re);
                                     if (re.data==1) {

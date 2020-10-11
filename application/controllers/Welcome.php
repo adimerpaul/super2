@@ -64,7 +64,7 @@ password='".$_POST['password']."'
             '0',
             '".$_POST['nombre']."',
             NULL,
-            NULL,
+            '".$_POST['direccion']."',
             '',
             '',
             '',
@@ -86,12 +86,19 @@ password='".$_POST['password']."'
             $this->db->query("UPDATE `tbclientes` SET 
             `Nombres` = '".$_POST['nombre']."',
             `celular` = '".$_POST['celular']."',
+            `Direccion` = '".$_POST['direccion']."',
             `mesa` = '".$_POST['mesa']."' WHERE `Id` = '".$_POST['carnet']."';");
             $query=$this->db->query("SELECT * FROM  tbclientes WHERE Id='".$_POST['carnet']."'");
             echo json_encode($query->result_array());
 
         }
     }
+    public  function buscarperona()
+    {
+        $query=$this->db->query("SELECT * FROM  tbclientes WHERE Id='".$_POST['carnet']."'");
+        echo json_encode($query->result_array());
+    }
+
     public function getgrupos(){
         $query=$this->db->query("SELECT * FROM tbgrupos g WHERE g.Cod_grup IN (SELECT tbproductos.cod_grup FROM tbproductos)");
         echo json_encode($query->result_array());
@@ -258,7 +265,7 @@ FROM tbproductos p WHERE p.cod_grup='$id'"
         '0000-00-00',
         '',
         '',
-        '1');");
+        '".$_POST['deliv']."');");
         echo "1";
     }
 }

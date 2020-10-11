@@ -25,11 +25,16 @@
 <div id="app">
     <template v-if="caja==1">
         <div id="caja1">
+            <div style="width: 100%;text-align: right;font-family: 'Broadway'">
+                <img src="img/aron.png" alt="" width="30" >ARON-9 delibery
+            </div>
+
             <div class="logo">
                 <img src="img/logosuper.png" alt="" width="350">
             </div>
             <div class="boton">
-                <button @click="caja++">INICIAR MI PEDIDO</button>
+                <button @click="caja++;tipo='0'">INICIAR MI PEDIDO</button>
+                <button type="submit" @click="caja++;tipo='1'">ENVIOS DELIVERY</button>
             </div>
         </div>
     </template>
@@ -38,12 +43,14 @@
             <div class="logo">
                 <img src="img/logosuper.png" alt="" width="50">
                 <form action="" id="formulario" @submit.prevent="datos">
+<!--                                        <small style="font-size: 5px">Coloque su carnet y si esta registrado llenaremos sus datos</small>-->
+                    <input type="text" @keyup="buscar" placeholder="Carnet" required v-model="carnet">
+
                     <input type="text" placeholder="Celular" required v-model="usuario.celular">
-                    <input type="text" placeholder="Nombre" required v-model="usuario.nombre">
-                    <input type="text" placeholder="Carnet" required v-model="usuario.carnet">
-<!--                    <input type="number" placeholder="Numero de mesa" required v-model="usuario.mesa">-->
-                    <input type="text" placeholder="Direccion" required v-model="usuario.direccion">
-                    <button type="submit" >INICIAR MI PEDIDO</button>
+                    <input type="text" placeholder="Nombre" required v-model="usuario.Nombres">
+                    <input v-if="tipo==0" type="number" placeholder="Numero de mesa" required v-model="usuario.mesa">
+                    <input v-else type="text" placeholder="Direccion" required v-model="usuario.Direccion">
+                    <button type="submit" @click="">INICIAR MI PEDIDO</button>
                 </form>
             </div>
         </div>
@@ -67,7 +74,7 @@
     <template v-else-if="caja==5">
         <div id="caja5">
             <div class="menu">
-                <label @click="caja=2">INICIO</label>
+                <label @click="caja=2;buscar()">INICIO</label>
                 <label @click="caja=4">SECCIONES</label>
                 <label  @click="caja=6" >MI PEDIDO <small class="pedidos">{{pedidos.length}}</small></label>
             </div>
@@ -253,7 +260,7 @@
 <!--                </v-list-item-content>-->
             </p>
             <h4 style="text-align: right;color: white;padding: 0em 0.5em">TOTAL BS. <small style="padding: 5px 10px ;border-radius: 5px;background: #C61B05">{{total}}</small></h4>
-            <h3 style="text-align: right;color: white;padding: 0em 0.5em"><small @click="realizarpedido" style="cursor:pointer ;padding: 5px 10px ;border-radius: 5px;color: #C61B05;text-shadow: #F2E402 1px 1px 0.5px">CONFIRMAR PEDIDO</small></h3>
+            <h3 style="text-align: right;color: white;padding: 0em 0.5em"><small @click="realizarpedido" style="cursor:pointer ;padding: 5px 10px ;border-radius: 5px;color: #F2E402">CONFIRMAR PEDIDO</small></h3>
 <!--            <pre>{{pedidos}}</pre>-->
         </div>
     </template>
