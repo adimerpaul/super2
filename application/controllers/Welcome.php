@@ -12,7 +12,8 @@ class Welcome extends CI_Controller {
         $this->db->query("INSERT INTO `tbclientes` SET
 Nombres='".$_POST['nombre']."',
 celular='".$_POST['celular']."',
-password='".$_POST['password']."'
+password='".$_POST['password']."',
+apellidos='".$_POST['apellidos']."'
 ");
         $query=$this->db->query("SELECT * FROM tbclientes WHERE Cod_Aut='".$this->db->insert_id()."'");
         echo json_encode($query->result_array());
@@ -56,7 +57,8 @@ password='".$_POST['password']."'
             `Canal`,
             `celular`,
             `password`,
-            `mesa`) VALUES 
+            `mesa`,
+            apellidos) VALUES 
             (NULL,
             '".$_POST['carnet']."',
             '',
@@ -78,7 +80,9 @@ password='".$_POST['password']."'
             '',
             '".$_POST['celular']."',
             '',
-            '$mesa');");
+            '$mesa',
+            '".$_POST['apellidos']."'
+            );");
 
             $query=$this->db->query("SELECT * FROM  tbclientes WHERE Id='".$_POST['carnet']."'");
             echo json_encode($query->result_array());
@@ -107,7 +111,7 @@ password='".$_POST['password']."'
 //        $query=$this->db->query("SELECT * FROM tbproductos WHERE cod_grup='$id' ");
 //p INNER JOIN tbstockm s ON p.cod_prod=s.cod_prod AND cod_grup='$id'");
         $query=$this->db->query(
-            "SELECT p.CodAut,p.cod_prod,p.Precio,p.Producto,p.stock,p.descripcion, (SELECT g.codAut  FROM tbgrupos g WHERE g.Cod_grup=p.cod_grup) as 'cod_grup',( 
+            "SELECT p.CodAut,p.cod_prod,p.img,p.Precio,p.Producto,p.stock,p.descripcion, (SELECT g.codAut  FROM tbgrupos g WHERE g.Cod_grup=p.cod_grup) as 'cod_grup',( 
 IF( (select count(*) FROM tbstockm s WHERE s.cod_prod=p.cod_prod )=1, 
 (select s.Saldo FROM tbstockm s WHERE s.cod_prod=p.cod_prod ) ,0) )as 'Saldo' 
 FROM tbproductos p WHERE p.cod_grup='$id'"

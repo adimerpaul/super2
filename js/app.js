@@ -45,6 +45,11 @@ var app = new Vue({
         }else{
             this.usuario.celular=localStorage.getItem("celular");
         }
+        if (localStorage.getItem("apellidos") === null || localStorage.getItem("apellidos")==undefined) {
+
+        }else{
+            this.usuario.apellidos=localStorage.getItem("apellidos");
+        }
         if (localStorage.getItem("nombre") === null || localStorage.getItem("nombre")==undefined) {
 
         }else{
@@ -72,6 +77,11 @@ var app = new Vue({
 
         axios.get('Welcome/sucursales').then(res=>{
             this.sucursales=res.data;
+            this.sucursal=this.sucursales[0];
+            // this.sucursales.forEach(r=>{
+            //     this.sucursal=r;
+            //     return false;
+            // })
         })
         axios.get('Welcome/getgrupos').then(res=>{
             this.grupos=res.data;
@@ -117,17 +127,20 @@ var app = new Vue({
             }
         },
         datos(){
+            // this.usuario.Nombres=this.usuario.Nombres+this.usuario.apellidos;
             localStorage.setItem("celular",this.usuario.celular);
             localStorage.setItem("nombre",this.usuario.Nombres);
             localStorage.setItem("carnet",this.carnet);
             localStorage.setItem("mesa",this.usuario.mesa);
             localStorage.setItem("direccion",this.usuario.Direccion);
-            this.caja++;
+            localStorage.setItem("apellidos",this.usuario.apellidos);
+            this.caja=4;
             axios.post('Welcome/ingreso',{
                 carnet:this.carnet,
                 nombre:this.usuario.Nombres,
                 direccion:this.usuario.Direccion,
-                celular:this.usuario.celular
+                celular:this.usuario.celular,
+                apellidos:this.usuario.apellidos
             }).then(res=>{
                // console.log(res.data);
                 this.usuario=res.data[0];

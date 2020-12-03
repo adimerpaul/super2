@@ -25,10 +25,9 @@
 <div id="app">
     <template v-if="caja==1">
         <div id="caja1">
-            <div style="width: 100%;text-align: right;font-family: 'Broadway'">
-                <img src="img/aron.png" alt="" width="30" >ARON-9 delibery
-            </div>
-
+<!--            <div style="width: 100%;text-align: right;font-family: 'Broadway'" >-->
+<!--                <img src="img/aron.png" alt="" width="30" >ARON-9 delibery-->
+<!--            </div>-->
             <div class="logo">
                 <img src="img/logosuper.png" alt="" width="350">
             </div>
@@ -44,31 +43,32 @@
                 <img src="img/logosuper.png" alt="" width="50">
                 <form action="" id="formulario" @submit.prevent="datos">
 <!--                                        <small style="font-size: 5px">Coloque su carnet y si esta registrado llenaremos sus datos</small>-->
-                    <input type="text" @keyup="buscar" placeholder="Carnet" required v-model="carnet">
-
-                    <input type="text" placeholder="Celular" required v-model="usuario.celular">
+                    <input type="text" @keyup="buscar" placeholder="Nit o Carnet" required v-model="carnet">
+                    <input type="text" placeholder="Numero de celular" required v-model="usuario.celular">
                     <input type="text" placeholder="Nombre" required v-model="usuario.Nombres">
-                    <input v-if="tipo==0" type="number" placeholder="Numero de mesa" required v-model="usuario.mesa">
+                    <input type="text" placeholder="Apellidos" v-model="usuario.apellidos">
+                    <input hidden v-if="tipo==0" type="number" placeholder="Numero de mesa" required v-model="usuario.mesa">
                     <input v-else type="text" placeholder="Direccion" required v-model="usuario.Direccion">
                     <button type="submit" @click="">INICIAR MI PEDIDO</button>
                 </form>
             </div>
         </div>
     </template>
-    <template v-else-if="caja==3">
-        <div id="caja3">
-            <p class="title-sucursal">SELECCIONE SU SUCURSAL PREFERIDA</p>
-            <div v-for="item in sucursales">
-                <div class="content-sucursal" @click="elegirsucursal(item)">
-                    <label>{{item.Sucursal}}</label>
-                    <p>{{item.direccion}}</p>
-                </div>
-            </div>
-        </div>
-    </template>
+<!--    <template v-else-if="caja==3">-->
+<!--        <div id="caja3">-->
+<!--            <p class="title-sucursal">SELECCIONE SU SUCURSAL PREFERIDA</p>-->
+<!--            <div v-for="item in sucursales">-->
+<!--                <div class="content-sucursal" @click="elegirsucursal(item)">-->
+<!--                    <label>{{item.Sucursal}}</label>-->
+<!--                    <p>{{item.direccion}}</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </template>-->
     <template v-else-if="caja==4">
         <div id="caja4">
             <p v-for="(item,index) in grupos" @click="elegirgrupo(item)" :key="index" v-bind:class="index%2==0?'grupo1':'grupo2'" >{{item.Descripcion}}</p>
+<!--            {{sucursal}}-->
         </div>
     </template>
     <template v-else-if="caja==5">
@@ -84,7 +84,7 @@
                     <div style="background: red;border: 0px;margin: 0px;padding: 0px" class="card">
                         <div  style="background: red;border: 0px;margin: 0px;padding: 0px" class="card-header" id="headingTwo">
 <!--                            <h2 class="mb-0">-->
-                                <button   v-bind:style="{background: '#ccc url(img/grupos/'+item.CodAut+'.jpg) no-repeat center center '}" style="width: 100%;border: 0px;margin: 0px;padding: 25px" class="btn text-center text-white btn-link btn-block text-left collapsed " type="button"
+                                <button   v-bind:style="{background: '#ccc url('+item.img+') no-repeat center center '}" style="width: 100%;border: 0px;margin: 0px;padding: 25px" class="btn text-center text-white btn-link btn-block text-left collapsed " type="button"
                                         data-toggle="collapse" v-bind:data-target="'#ab'+item.CodAut" aria-expanded="false">
                                     {{item.Producto}}
                                 </button>
