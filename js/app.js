@@ -406,7 +406,7 @@ var app = new Vue({
                                 'success'
                             );
                             Vue.toasted.clear();
-                            this.caja=3;
+                            this.caja=1;
                             this.pedidos=[];
                         });
 

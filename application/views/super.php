@@ -41,7 +41,7 @@
         <div id="caja1">
             <div class="logo">
                 <img src="img/logosuper.png" alt="" width="50">
-                <form action="" id="formulario" @submit.prevent="datos">
+                <form action="" id="formulario" @submit.prevent="datos" novalidate>
 <!--                                        <small style="font-size: 5px">Coloque su carnet y si esta registrado llenaremos sus datos</small>-->
                     <input type="text" @keyup="buscar" placeholder="Nit o Carnet" required v-model="carnet">
                     <input type="text" placeholder="Numero de celular" required v-model="usuario.celular">
